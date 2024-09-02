@@ -22,7 +22,7 @@ run_b_compilemodule() {
 
     fo=${f#*\/} 
     echo "$0: Building ${fo/.cpp/.so}..."
-    g++ -fPIC -shared "$f" -o "./mods/${fo/.cpp/.so}" 
+    g++ -Iinc/ -fPIC -shared src/logger.c "$f" -o "./mods/${fo/.cpp/.so}" 
     echo "$0: Done building ${fo/.cpp/.so}"
 
 }

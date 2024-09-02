@@ -1,7 +1,23 @@
 #include <iostream>
+#include <engine/logger.h>
 
-extern "C" void on_start() {
-    std::cout << "Starting glfw...\n";
-    std::cout << "GLFW started.\n";
+#include <mod/template.h>
+
+struct GLFWContext {
+    GLFWContext() {
+        FE_WARNING("Context created.");
+    }
+
+    ~GLFWContext() {
+        FE_WARNING("Context destroyed.");
+    }
+};
+
+EVENT on_start() {
+    FE_INFO("Initializing GLFW...");
+
+    GLFWContext ctx;
+
+    FE_INFO("GLFW started.");
 }
 

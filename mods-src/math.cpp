@@ -1,6 +1,9 @@
 #include <iostream>
+#include <engine/logger.h>
 
-extern "C" void on_start() {
-    std::cout << "Math stuff happens here.\n";
+#include <mod/template.h>
+
+EVENT on_start() {
+    FE_INFO("Math module loaded.");
 }
 
