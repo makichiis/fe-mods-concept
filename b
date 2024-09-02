@@ -43,6 +43,7 @@ run_b_clean() {
     fi 
 
     rm -rf ./build 
+    rm -rf ./mods 
 } 
 
 subcmd=$1
