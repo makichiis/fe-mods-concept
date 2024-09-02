@@ -9,6 +9,9 @@ run_b_build() {
 }
 
 run_b_run() {
+    if [ ! -d ./mods ]; then 
+        run_b_buildmods
+    fi 
     run_b_configure \
     && run_b_build \
     && ./build/engine-kernel 
@@ -25,6 +28,7 @@ run_b_compilemodule() {
 }
 
 run_b_buildmods() {
+    mkdir -p ./mods 
     for f in mods-src/*.cpp; do
         [ -e "$f" ] || continue 
         run_b_compilemodule $f &

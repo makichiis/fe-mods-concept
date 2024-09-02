@@ -48,6 +48,7 @@ int main() {
             module_from_path(&mod, pathname);
 
             if (mod.cb_on_start) mod.cb_on_start();
+            FE_INFO("Done.");
         }
     }
 
