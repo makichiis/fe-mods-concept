@@ -18,10 +18,12 @@ void module_from_path(module* mod, const char* path) {
     mod->handle = dlopen(path, RTLD_LAZY);
     if (!mod->handle) {
         FE_ERROR("Failed to load module %s", path);
-        return;
+        goto module_from_path_end_safe;
     }
-
+    
     mod->cb_on_start = (void(*)())dlsym(mod->handle, "on_start");
+
+module_from_path_end_safe:
     if (!mod->cb_on_start) mod->cb_on_start = cb_no_callback;
 }
 
