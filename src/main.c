@@ -12,6 +12,8 @@ typedef struct module {
     void (*cb_on_start)();
 } module;
 
+void cb_no_callback() {}
+
 void module_from_path(module* mod, const char* path) {
     mod->handle = dlopen(path, RTLD_LAZY);
     if (!mod->handle) {
@@ -20,6 +22,7 @@ void module_from_path(module* mod, const char* path) {
     }
 
     mod->cb_on_start = (void(*)())dlsym(mod->handle, "on_start");
+    if (!mod->cb_on_start) mod->cb_on_start = cb_no_callback;
 }
 
 #define MODS_PATH "./mods"
@@ -47,7 +50,7 @@ int main() {
             module mod;
             module_from_path(&mod, pathname);
 
-            if (mod.cb_on_start) mod.cb_on_start();
+            mod.cb_on_start();
             FE_INFO("Done.");
         }
     }
