@@ -50,6 +50,7 @@ void vec_module_unload_all_mods(vec_module* vm) {
 void vec_module_destroy(vec_module* vm) {
     for (size_t i = 0; i < vm->nmemb; ++i)
         if (vm->elems[i].handle != NULL)
+            // TODO: use dlinfo to get mod name
             FE_ERROR("Unfreed module at %s at addr 0x%.8X", "todo", vm->elems[i].handle);
     free(vm->elems);
     vm->capacity = 0;
